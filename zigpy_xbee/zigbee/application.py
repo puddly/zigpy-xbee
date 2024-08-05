@@ -47,7 +47,7 @@ class ControllerApplication(zigpy.application.ControllerApplication):
 
     def __init__(self, config: dict[str, Any]):
         """Initialize instance."""
-        super().__init__(config=zigpy.config.ZIGPY_SCHEMA(config))
+        super().__init__(config=config)
         self._api: zigpy_xbee.api.XBee | None = None
         self.topology.add_listener(self)
 
