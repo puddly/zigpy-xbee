@@ -23,6 +23,9 @@ APP_CONFIG = {
         config.CONF_DEVICE_BAUDRATE: 115200,
     },
     config.CONF_DATABASE: None,
+    config.CONF_OTA: {
+        config.CONF_OTA_ENABLED: False,
+    },
 }
 
 
