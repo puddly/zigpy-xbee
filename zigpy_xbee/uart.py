@@ -79,7 +79,8 @@ class Gateway(zigpy.serial.SerialProtocol):
                 break
             self.frame_received(frame)
         if self._in_command_mode and self._buffer[-1:] == b"\r":
-            rsp, self._buffer = (self._buffer[:-1], b"")
+            rsp = self._buffer[:-1]
+            self._buffer.clear()
             self.command_mode_rsp(rsp)
 
     def frame_received(self, frame):
