@@ -15,7 +15,7 @@ from zigpy_xbee.exceptions import InvalidCommand
 import zigpy_xbee.types as xbee_t
 from zigpy_xbee.zigbee import application
 
-import tests.async_mock as mock
+from unittest import mock
 
 APP_CONFIG = {
     config.CONF_DEVICE: {

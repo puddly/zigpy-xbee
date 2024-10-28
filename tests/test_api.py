@@ -1,6 +1,7 @@
 """Tests for API."""
 
 import asyncio
+from unittest import mock
 
 import pytest
 import serial
@@ -11,8 +12,6 @@ import zigpy.types as t
 from zigpy_xbee import api as xbee_api, types as xbee_t, uart
 from zigpy_xbee.exceptions import ATCommandError, ATCommandException, InvalidCommand
 from zigpy_xbee.zigbee.application import ControllerApplication
-
-import tests.async_mock as mock
 
 DEVICE_CONFIG = zigpy.config.SCHEMA_DEVICE(
     {
