@@ -37,6 +37,29 @@ async def test_connect():
         await api.connect()
 
 
+async def test_connect_initial_timeout_success():
+    """Test connect, initial command times out."""
+    api = xbee_api.XBee(DEVICE_CONFIG)
+    api._at_command = mock.AsyncMock(side_effect=asyncio.TimeoutError)
+    api.init_api_mode = mock.AsyncMock(return_value=True)
+
+    with mock.patch("zigpy_xbee.uart.connect"):
+        await api.connect()
+
+
+async def test_connect_initial_timeout_failure():
+    """Test connect, initial command times out."""
+    api = xbee_api.XBee(DEVICE_CONFIG)
+    api._at_command = mock.AsyncMock(side_effect=asyncio.TimeoutError)
+    api.init_api_mode = mock.AsyncMock(return_value=False)
+
+    with mock.patch("zigpy_xbee.uart.connect") as mock_connect:
+        with pytest.raises(zigpy.exceptions.APIException):
+            await api.connect()
+
+    assert mock_connect.return_value.disconnect.mock_calls == [mock.call()]
+
+
 async def test_disconnect(api):
     """Test connection close."""
     uart = api._uart
