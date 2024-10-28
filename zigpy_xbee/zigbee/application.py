@@ -59,7 +59,7 @@ class ControllerApplication(zigpy.application.ControllerApplication):
 
     async def connect(self):
         """Connect to the device."""
-        api = await zigpy_xbee.api.XBee(self._config[CONF_DEVICE])
+        api = zigpy_xbee.api.XBee(self._config[CONF_DEVICE])
         await api.connect()
         api.set_application(self)
 
